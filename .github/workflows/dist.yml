@@ -1,0 +1,10 @@
+name: dist
+on: pull_request
+permissions:
+  contents: write
+jobs:
+  dist:
+    uses: John-E5/action-dist-sync/.github/workflows/sync.yml@v0
+    with:
+      build-command: node build.mjs
+      dist-path: dist
