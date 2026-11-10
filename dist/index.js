@@ -1,2 +1,2 @@
 // built
-console.log('hello v1');
+console.log('hello v2');
