@@ -1,0 +1,25 @@
+name: drift-ci
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  pull-requests: write
+  id-token: write # keyless: runs sync to drift-ci.com with a GitHub OIDC token, no ingest token needed
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: Drift-CI/drift-ci@v1
+        with:
+          provider: anthropic
+          api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+          dashboard-url: https://drift-ci.com
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
